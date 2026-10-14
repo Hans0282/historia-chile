@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia de Chile - Presentación Interactiva</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        chileRed: '#C8102E',
+                        chileBlue: '#00205B',
+                        chileDark: '#0A0F1D',
+                        chileCard: '#131B2E',
+                        chileAccent: '#E31C3D',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A0F1D;
+            color: #F3F4F6;
+        }
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A0F1D;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00205B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C8102E;
+        }
+        .star-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-chileRed selection:text-white">
+
+    <!-- Header Banner -->
+    <header class="relative bg-gradient-to-b from-chileBlue/90 via-chileDark to-chileDark border-b border-chileRed/30 pt-10 pb-8 px-4 text-center overflow-hidden star-pattern">
+        <!-- Floating Flag Accent Background -->
+        <div class="absolute -top-10 left-1/2 -translate-x-1/2 w-96 h-96 bg-chileRed/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="inline-flex items-center space-x-2 bg-chileBlue/60 border border-white/10 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider text-blue-200 mb-4 uppercase">
+                <i class="fa-solid font-star text-white"></i>
+                <span>Edición Escolar & Académica</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white font-cinzel tracking-wider drop-shadow-md">
+                Historia de <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-red-200 to-chileRed">Chile</span>
+            </h1>
+            <p class="mt-3 text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed">
+                Un recorrido visual y cronológico por los grandes hitos de nuestra nación.
+            </p>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-40 bg-chileDark/90 backdrop-blur-md border-y border-white/10 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex items-center justify-between h-14">
+                <div class="flex items-center space-x-1 sm:space-x-4 overflow-x-auto py-2 no-scrollbar w-full md:w-auto justify-center md:justify-start">
+                    <a href="#seccion1" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium text-gray-200 hover:text-white hover:bg-chileBlue transition-all flex items-center gap-2 whitespace-nowrap">
+                        <i class="fa-solid fa-campground text-chileRed"></i> 1. Pueblos Originarios
+                    </a>
+                    <a href="#seccion2" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium text-gray-200 hover:text-white hover:bg-chileBlue transition-all flex items-center gap-2 whitespace-nowrap">
+                        <i class="fa-solid fa-flag text-white"></i> 2. Independencia
+                    </a>
+                    <a href="#seccion3" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium text-gray-200 hover:text-white hover:bg-chileBlue transition-all flex items-center gap-2 whitespace-nowrap">
+                        <i class="fa-solid fa-building-columns text-chileRed"></i> 3. República Moderna
+                    </a>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="hidden md:flex items-center space-x-3">
+                    <button onclick="toggleModal('codeModal')" class="bg-chileBlue/80 hover:bg-chileBlue text-white text-xs font-semibold px-3 py-2 rounded-lg border border-white/20 transition flex items-center gap-2">
+                        <i class="fa-solid fa-code"></i> Ver Código HTML
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-8 sm:py-12 space-y-12 sm:space-y-16">
+
+        <!-- Banner de control de imágenes/simulación -->
+        <div class="bg-chileCard/80 border border-white/10 rounded-xl p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-gray-300">
+            <div class="flex items-center space-x-3">
+                <div class="p-2.5 bg-chileBlue/50 rounded-lg text-blue-300">
+                    <i class="fa-solid fa-folder-tree text-lg"></i>
+                </div>
+                <div>
+                    <p class="font-semibold text-white">Ruta requerida de archivos:</p>
+                    <p class="font-mono text-gray-400">carpetadeproyecto/images/historia[1-3].jpg</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2 w-full md:w-auto">
+                <button onclick="toggleModal('codeModal')" class="w-full md:w-auto md:hidden bg-chileBlue/80 hover:bg-chileBlue text-white px-3 py-2 rounded-lg text-xs font-semibold border border-white/20">
+                    <i class="fa-solid fa-code mr-1"></i> Ver Código
+                </button>
+                <button onclick="simulateImageStatus()" class="w-full md:w-auto bg-chileRed/20 hover:bg-chileRed/40 text-red-200 border border-chileRed/40 px-3 py-2 rounded-lg text-xs font-medium transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-rotate"></i> Probar Carga
+                </button>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 1: Pueblos Originarios -->
+        <section id="seccion1" class="scroll-mt-20 bg-chileCard rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl relative overflow-hidden group">
+            <div class="absolute top-0 right-0 w-2 h-full bg-chileRed"></div>
+            
+            <div class="flex items-center gap-3 mb-6">
+                <span class="w-8 h-8 rounded-full bg-chileRed/20 border border-chileRed text-chileRed flex items-center justify-center font-bold text-sm">1</span>
+                <h2 class="text-2xl sm:text-3xl font-bold font-cinzel text-white">Pueblos Originarios</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4 text-gray-300 leading-relaxed text-sm sm:text-base">
+                    <p>
+                        Antes de la llegada de los conquistadores españoles, el territorio chileno estaba habitado por diversas y prósperas culturas ancestrales adaptadas a geografías extremas.
+                    </p>
+                    <p>
+                        Entre las principales destacan los <strong>Mapuches</strong> en los valles del centro y sur, conocidos por su profunda cosmovisión y resistencia; los <strong>Aymaras</strong> y <strong>Atacameños</strong> en el desierto septentrional; y los navegantes del sur como los <strong>Yámanas</strong> y <strong>Kawésqar</strong>. En el Océano Pacífico destaca la cultura milenaria de <strong>Rapa Nui</strong>.
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-2">
+                        <span class="bg-chileBlue/60 text-blue-200 text-xs px-2.5 py-1 rounded-md border border-white/5">Mapuche</span>
+                        <span class="bg-chileBlue/60 text-blue-200 text-xs px-2.5 py-1 rounded-md border border-white/5">Rapa Nui</span>
+                        <span class="bg-chileBlue/60 text-blue-200 text-xs px-2.5 py-1 rounded-md border border-white/5">Aymara</span>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <div class="overflow-hidden rounded-xl border-2 border-white/10 bg-chileDark aspect-video flex items-center justify-center relative shadow-lg">
+                        <!-- Img real con Fallback por JS -->
+                        <img id="img1" src="images/historia1.jpg" alt="Pueblos Originarios" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="handleImageError(this, 'Pueblos Originarios', 'Culturas ancestrales Mapuche, Aymara y Rapa Nui', 'images/historia1.jpg')">
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2 text-center font-mono">Archivo: images/historia1.jpg</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: Independencia de Chile -->
+        <section id="seccion2" class="scroll-mt-20 bg-chileCard rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl relative overflow-hidden group">
+            <div class="absolute top-0 right-0 w-2 h-full bg-white"></div>
+
+            <div class="flex items-center gap-3 mb-6">
+                <span class="w-8 h-8 rounded-full bg-white/20 border border-white text-white flex items-center justify-center font-bold text-sm">2</span>
+                <h2 class="text-2xl sm:text-3xl font-bold font-cinzel text-white">Independencia de Chile</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4 text-gray-300 leading-relaxed text-sm sm:text-base md:order-2">
+                    <p>
+                        El proceso de emancipación nacional comenzó formalmente el <strong>18 de septiembre de 1810</strong> con la formación de la Primera Junta Nacional de Gobierno en Santiago.
+                    </p>
+                    <p>
+                        Tras periodos turbulentos como la Patria Vieja, la Reconquista y la Patria Nueva, líderes libertadores como <strong>Bernardo O'Higgins</strong>, <strong>José Miguel Carrera</strong> y <strong>Manuel Rodríguez</strong>, junto al Ejército Libertador de los Andes liderado por San Martín, lograron la victoria decisiva en la Batalla de Maipú (1818).
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-2">
+                        <span class="bg-chileBlue/60 text-blue-200 text-xs px-2.5 py-1 rounded-md border border-white/5">1810 - 1818</span>
+                        <span class="bg-chileBlue/60 text-blue-200 text-xs px-2.5 py-1 rounded-md border border-white/5">Primera Junta</span>
+                        <span class="bg-chileBlue/60 text-blue-200 text-xs px-2.5 py-1 rounded-md border border-white/5">Batalla de Maipú</span>
+                    </div>
+                </div>
+
+                <div class="relative group md:order-1">
+                    <div class="overflow-hidden rounded-xl border-2 border-white/10 bg-chileDark aspect-video flex items-center justify-center relative shadow-lg">
+                        <img id="img2" src="images/historia2.jpg" alt="Independencia de Chile" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="handleImageError(this, 'Independencia de Chile', 'Proceso libertador de 1810 y Batalla de Maipú', 'images/historia2.jpg')">
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2 text-center font-mono">Archivo: images/historia2.jpg</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: La República Moderna -->
+        <section id="seccion3" class="scroll-mt-20 bg-chileCard rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl relative overflow-hidden group">
+            <div class="absolute top-0 right-0 w-2 h-full bg-chileBlue"></div>
+
+            <div class="flex items-center gap-3 mb-6">
+                <span class="w-8 h-8 rounded-full bg-chileBlue/40 border border-blue-400 text-blue-300 flex items-center justify-center font-bold text-sm">3</span>
+                <h2 class="text-2xl sm:text-3xl font-bold font-cinzel text-white">La República Moderna</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4 text-gray-300 leading-relaxed text-sm sm:text-base">
+                    <p>
+                        Durante los siglos XX y XXI, Chile ha consolidado su desarrollo institucional, económico y cultural a través de importantes transformaciones sociales.
+                    </p>
+                    <p>
+                        Desde el auge de la minería del salitre y el cobre, la expansión de la educación pública, hasta la consolidación democrática y el liderazgo en astronomía global e innovación energética, la República Moderna proyecta a Chile hacia el futuro preservando sus tradiciones.
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-2">
+                        <span class="bg-chileBlue/60 text-blue-200 text-xs px-2.5 py-1 rounded-md border border-white/5">Institucionalidad</span>
+                        <span class="bg-chileBlue/60 text-blue-200 text-xs px-2.5 py-1 rounded-md border border-white/5">Minería & Astronomía</span>
+                        <span class="bg-chileBlue/60 text-blue-200 text-xs px-2.5 py-1 rounded-md border border-white/5">Siglo XXI</span>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <div class="overflow-hidden rounded-xl border-2 border-white/10 bg-chileDark aspect-video flex items-center justify-center relative shadow-lg">
+                        <img id="img3" src="images/historia3.jpg" alt="República Moderna" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="handleImageError(this, 'La República Moderna', 'Desarrollo moderno, institucionalidad e innovación', 'images/historia3.jpg')">
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2 text-center font-mono">Archivo: images/historia3.jpg</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-chileDark border-t border-white/10 py-8 px-4 text-center text-xs sm:text-sm text-gray-400">
+        <div class="max-w-5xl mx-auto space-y-3">
+            <div class="flex justify-center items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-chileBlue"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-white"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-chileRed"></span>
+            </div>
+            <p class="font-medium text-gray-300">Página Web Educativa - Historia de Chile</p>
+            <p class="text-gray-500">Diseñado para carpetas locales y despliegue directo en GitHub Pages</p>
+        </div>
+    </footer>
+
+    <!-- Code Viewer Modal -->
+    <div id="codeModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-chileCard border border-white/20 rounded-2xl w-full max-w-4xl max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-chileDark">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-code text-chileRed"></i>
+                    <h3 class="font-bold text-white text-base">Código Fuente de index.html</h3>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="copySourceCode()" id="copyBtn" class="bg-chileBlue hover:bg-blue-800 text-white text-xs px-3 py-1.5 rounded-md font-semibold transition flex items-center gap-1.5">
+                        <i class="fa-regular fa-copy"></i> <span>Copiar Código</span>
+                    </button>
+                    <button onclick="toggleModal('codeModal')" class="text-gray-400 hover:text-white p-1 rounded-lg">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Code Area -->
+            <div class="p-4 flex-1 overflow-y-auto bg-black/60 font-mono text-xs text-gray-300 leading-relaxed">
+                <pre id="codeDisplay"><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Historia de Chile&lt;/title&gt;
+    &lt;style&gt;
+        body { font-family: sans-serif; background: #0A0F1D; color: #fff; margin: 0; }
+        header { background: #00205B; text-align: center; padding: 2rem; }
+        nav { background: #C8102E; padding: 1rem; text-align: center; }
+        nav a { color: white; margin: 0 1rem; text-decoration: none; font-weight: bold; }
+        .container { max-width: 1000px; margin: auto; padding: 2rem; }
+        section { background: rgba(255,255,255,0.05); margin-bottom: 2rem; padding: 2rem; border-radius: 12px; }
+        img { max-width: 100%; border-radius: 8px; border: 2px solid #C8102E; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Historia de Chile&lt;/h1&gt;
+    &lt;/header&gt;
+    &lt;nav&gt;
+        &lt;a href="#seccion1"&gt;Pueblos Originarios&lt;/a&gt;
+        &lt;a href="#seccion2"&gt;Independencia&lt;/a&gt;
+        &lt;a href="#seccion3"&gt;República Moderna&lt;/a&gt;
+    &lt;/nav&gt;
+    &lt;div class="container"&gt;
+        &lt;section id="seccion1"&gt;
+            &lt;h2&gt;1. Pueblos Originarios&lt;/h2&gt;
+            &lt;img src="images/historia1.jpg" alt="Pueblos Originarios"&gt;
+        &lt;/section&gt;
+        &lt;section id="seccion2"&gt;
+            &lt;h2&gt;2. Independencia de Chile&lt;/h2&gt;
+            &lt;img src="images/historia2.jpg" alt="Independencia"&gt;
+        &lt;/section&gt;
+        &lt;section id="seccion3"&gt;
+            &lt;h2&gt;3. La República Moderna&lt;/h2&gt;
+            &lt;img src="images/historia3.jpg" alt="República Moderna"&gt;
+        &lt;/section&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-chileBlue text-white px-4 py-3 rounded-xl shadow-2xl border border-white/20 text-xs sm:text-sm font-medium transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-2 z-50">
+        <i class="fa-solid fa-circle-check text-green-400"></i>
+        <span id="toastMsg">¡Código copiado con éxito!</span>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Fallback UI generator when local images aren't present in preview mode
+        function handleImageError(imgElement, title, subtitle, path) {
+            const parent = imgElement.parentElement;
+            
+            // Create elegant SVG placeholder replacement
+            const fallbackHTML = `
+                <div class="w-full h-full min-h-[220px] p-6 flex flex-col items-center justify-center text-center bg-gradient-to-br from-chileBlue/40 via-chileDark to-chileCard relative group">
+                    <div class="w-14 h-14 rounded-full bg-chileRed/20 border border-chileRed/50 text-chileRed flex items-center justify-center mb-3 text-xl">
+                        <i class="fa-solid fa-image"></i>
+                    </div>
+                    <h4 class="text-white font-bold text-base mb-1 font-cinzel">${title}</h4>
+                    <p class="text-xs text-gray-300 max-w-xs mb-3">${subtitle}</p>
+                    <span class="inline-flex items-center gap-1 text-[11px] font-mono bg-black/50 text-red-300 px-2.5 py-1 rounded border border-red-500/30">
+                        <i class="fa-solid fa-triangle-exclamation text-yellow-400"></i> ${path} no encontrada
+                    </span>
+                </div>
+            `;
+            
+            parent.innerHTML = fallbackHTML;
+        }
+
+        // Toggle Modal helper
+        function toggleModal(id) {
+            const modal = document.getElementById(id);
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            } else {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        // Copy source code to clipboard
+        function copySourceCode() {
+            const codeText = document.getElementById('codeDisplay').innerText;
+            
+            const textarea = document.createElement('textarea');
+            textarea.value = codeText;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            showToast("¡Código HTML copiado al portapapeles!");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function simulateImageStatus() {
+            showToast("Recargando estado de imágenes en la carpeta 'images/'...");
+            setTimeout(() => {
+                window.location.reload();
+            }, 800);
+        }
+    </script>
+</body>
+</html>
